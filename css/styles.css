@@ -150,11 +150,11 @@ header.sticky{position:fixed;z-index:999}
 
 .about-info {
 	width: 100%;
+    text-align: center;
 }
 
 .about-info p {
 	line-height: 24px;
-	text-align: center;
 }
 
 .img-profile {
