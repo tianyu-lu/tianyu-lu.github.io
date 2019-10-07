@@ -18,14 +18,14 @@
 <body>
     <div id="about">
         <h2 class="heading">Abstract</h2>
-        <p></p>
+        <p>To optimize a protein’s catalytic activity, we train two neural networks. One, a generative model that sees a dataset of protein sequences and generates new sequences based on those previously seen. For this we use a recurrent neural network (RNN). Two, we need a discriminative model that for a given protein sequence, is able to accurately predict its catalytic activity. For this, we train a variety of machine learning models and choose the best performing model. In addition, for the discriminative model, we apply transfer learning to improve model performance on small datasets such as that for PETase.</p>
     </div>
 
     <div id="about">
         <h2 class="heading">Details</h2>
         <div class="highlights">
             <p>
-                I custom tailored the conditioning algorithm by <a href="https://arxiv.org/abs/1901.10060">Brookes et al.</a> for PETase protein function optimization. To mitigate the lack of PETase kinetics data, I applied transfer learning to the oracle predictive function. The larger dataset for the first step of transfer learning was curated from <a href="http://sabiork.h-its.org/sabioRestWebServices">SABIO-RK</a> kinetics database.
+                The pipeline above was inspired by the algorithm by <a href="https://arxiv.org/abs/1901.10060">Brookes et al.</a>. The larger dataset for the first step of transfer learning was curated from <a href="http://sabiork.h-its.org/sabioRestWebServices">SABIO-RK</a> kinetics database.
             </p>
             <p>
                 <a href="https://github.com/MauriceR71/CbAS">GitHub link for full implementation</a>.
