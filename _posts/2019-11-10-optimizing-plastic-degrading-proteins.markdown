@@ -17,7 +17,7 @@ We present a generalizable and automated pipeline for protein design. Our model 
 ### Intuition
 We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $\mathbf{x}_i$ are the input vectors, the boxes in $A$ are described in more detail in the Formal Definition section, and the $\mathbf{h}_i$ are the outputs for each cell.
 
-![](https://i.imgur.com/zMIkiPH.png)
+![](https://i.imgur.com/zMIkiPH.png =250x)
 
 These types of neural networks are well-suited for sequence data, such as amino acid sequences. We were first drawn to the generative ability of RNNs from an experiment done by Andreji Karpathy [cite]. He trained an RNN on the entire Shakespeare corpus and asked it to generate new Shakespeare text. Remarkably, the sample shown below closely captures Shakespeare's writing style.  
 
