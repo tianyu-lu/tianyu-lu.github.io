@@ -1,13 +1,15 @@
+<script src="//yihui.org/js/math-code.js"></script>
+<!-- Just one possible MathJax CDN below. You may use others. -->
+<script async
+  src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 ---
 layout: post
 title:  "Optimizing Plastic Degrading Proteins"
 date:   2019-11-10 10:18:00
-categories: Protein ML iGEM
+categories: iGEM 2019
 ---
-
-# Protein Optimization with Machine Learning
-
-## 1. Abstract
 
 We present a generalizable and automated pipeline for protein design. Our model can be applied to the optimization of any protein class, even those with scarce data. We first train an AdaBoost regressor that is able to predict a protein property from sequence alone. We then train a recurrent neural network (RNN) that is able to generate novel protein sequences. Generated sequences are evaluated by the regressor and those that pass a specified threshold are added in the training set for the RNN to be retrained. This iterative process continues until convergence or experimental validation.
 
