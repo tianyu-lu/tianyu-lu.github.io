@@ -1,16 +1,16 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: Tianyu Lu
+description: Computation Biology
+meta_description: "Tianyu Lu, Computational Biology"
 
 markdown: kramdown
 highlighter: pygments
-logo: false
+logo: true
 paginate: 15
 baseurl: /
-domain_name: 'http://yourblog-domain.com'
+domain_name: 'http://tianyu-lu.github.io'
 google_analytics: 'UA-XXXXXXXX-X'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
 url:            'blog url'
-author:         'Your Name'
+author:         'Tianyu Lu'
