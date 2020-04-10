@@ -1,21 +1,27 @@
 ---
 layout: post
 title:  "Optimizing Plastic Degrading Proteins"
-date:   2019-11-10 10:18:00
-categories: iGEM 2019
+date:   2019-11-01 10:00:00
+categories: iGEM Protein ML
+excerpt_separator: <!--more-->
 ---
 
-We present a generalizable and automated pipeline for protein design. Our model can be applied to the optimization of any protein class, even those with scarce data.   
+We present a generalizable and automated pipeline for protein design. Our model can be applied to the optimization of any protein class, even those with scarce data.
 
-We first train an AdaBoost regressor that is able to predict a protein property from sequence alone. We then train a recurrent neural network (RNN) that is able to generate novel protein sequences. Generated sequences are evaluated by the regressor and those that pass a specified threshold are added in the training set for the RNN to be retrained. This iterative process continues until convergence or experimental validation.
+<!--more-->
+# Protein Optimization with Machine Learning
+
+## 1. Abstract
+
+We present a generalizable and automated pipeline for protein design. Our model can be applied to the optimization of any protein class, even those with scarce data. We first train an AdaBoost regressor that is able to predict a protein property from sequence alone. We then train a recurrent neural network (RNN) that is able to generate novel protein sequences. Generated sequences are evaluated by the regressor and those that pass a specified threshold are added in the training set for the RNN to be retrained. This iterative process continues until convergence or experimental validation.
 
 ## 2. Generative Model
 ### Intuition
-We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $\mathbf{x}_i$ are the input vectors, the boxes in $A$ are described in more detail in the Formal Definition section, and the $\mathbf{h}_i$ are the outputs for each cell.
+We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $$\mathbf{x}_i$$ are the input vectors, the boxes in $A$ are described in more detail in the Formal Definition section, and the $\mathbf{h}_i$ are the outputs for each cell.
 
-![](https://i.imgur.com/zMIkiPH.png =250x)
+![](https://i.imgur.com/zMIkiPH.png)
 
-These types of neural networks are well-suited for sequence data, such as amino acid sequences. We were first drawn to the generative ability of RNNs from an experiment done by Andreji Karpathy [cite]. He trained an RNN on the entire Shakespeare corpus and asked it to generate new Shakespeare text. Remarkably, the sample shown below closely captures Shakespeare's writing style.  
+These types of neural networks are well-suited for sequence data, such as amino acid sequences. We were first drawn to the generative ability of RNNs from an experiment done by Andreji Karpathy. He trained an RNN on the entire Shakespeare corpus and asked it to generate new Shakespeare text. Remarkably, the sample shown below closely captures Shakespeare's writing style.  
 
 ![](https://i.imgur.com/PDt73bz.png)
 
@@ -220,7 +226,3 @@ https://github.com/MauriceR71/Composite-Residues_keras_implementation
 `gfp_data.csv`: .csv file of about 58000 GFP sequences and their corresponding brightness  
 
 `PETase_mutations.csv`: .csv file of 19 PETase sequences and their corresponding activity  
-
-
-[jekyll-gh]: https://github.com/mojombo/jekyll
-[jekyll]:    http://jekyllrb.com
