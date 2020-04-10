@@ -3,6 +3,8 @@ description: Computation and Biology
 meta_description: "Tianyu Lu, Computational Biology"
 
 markdown: kramdown
+kramdown:
+   math_engine: mathjax
 highlighter: pygments
 logo: true
 paginate: 15

@@ -10,7 +10,10 @@ post_class: post-template
         <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
         <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
     </nav>
+
 </header>
+
+{% include head.html %}
 
 <main class="content" role="main">
 
@@ -90,3 +93,5 @@ post_class: post-template
     </article>
 
 </main>
+
+{% include footer.html %}
