@@ -4,7 +4,7 @@ title: About me
 ---
 
 <center>
-    <img src="/assets/images/profile.PNG" width="150" />
+    <img src="/assets/images/profile.png" width="80" />
 </center>
 
 I'm an undergrad in Bioinformatics, Computational Biology and Computer Science at the University of Toronto, working with Philip Kim on machine learning guided protein design for cancer therapeutics. I also lead University of Toronto's iGEM dry lab team, where we work on optimizing PETase, a plastic-degrading enzyme.

@@ -10,8 +10,6 @@ The lectures on protein design below are part of a summer workshop series on syn
 
 <!--more-->
 
-# Protein Design Lectures
-
 ### Methods in Computational Protein Design
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fAP_5AnES8M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
