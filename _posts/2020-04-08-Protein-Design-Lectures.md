@@ -2,7 +2,7 @@
 layout: post
 title:  "Protein Design Lectures"
 date:   2019-11-01 10:00:00
-categories: iGEM Protein ML
+categories: Teaching Protein ML
 excerpt_separator: <!--more-->
 ---
 

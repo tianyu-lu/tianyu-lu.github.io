@@ -18,26 +18,26 @@ Our model consists of an AdaBoost regressor that is able to predict a protein pr
 We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $$\mathbf{x}_i$$ are the input vectors, the boxes in $$A$$ are described in more detail in the Formal Definition section, and the $$\mathbf{h}_i$$ are the outputs for each cell.
 
 <center>
-    <img src="https://i.imgur.com/zMIkiPH.png" width="250" />
+    <img src="https://i.imgur.com/zMIkiPH.png" width="250px" />
 </center>
 
 These types of neural networks are well-suited for sequence data, such as amino acid sequences. We were first drawn to the generative ability of RNNs from an experiment done by Andreji Karpathy. He trained an RNN on the entire Shakespeare corpus and asked it to generate new Shakespeare text. Remarkably, the sample shown below closely captures Shakespeare's writing style.  
 
 <center>
-    <img src="https://i.imgur.com/PDt73bz.png" width="250" />
+    <img src="https://i.imgur.com/PDt73bz.png" width="250px" />
 </center>
 
 He also trained an RNN on Linux source code.  
 
 <center>
-    <img src="https://i.imgur.com/vJ7KXxI.png" width="250" />
+    <img src="https://i.imgur.com/vJ7KXxI.png" width="250px" />
 </center>
 
 Disregard the particular words but notice the structure of the generated code shown below. The RNN was able to capture the syntax of the language remarkably well. Notice how in this example, every open parentheses is eventually followed by a close parentheses. These two experiments inspired us to apply RNNs to generate novel protein sequences. In effect, we are asking the question, how well can RNNs capture patterns in the protein language, the ordered sequence of amino acids?  
 In the software industry, RNNs are frequently used in chatbots, where an objective might be to predict the next word to generate. Suppose we want to predict the red word. Its tense actually depends on a noun many words before it. This concept is known as long term dependencies. 
 
 <center>
-    <img src="https://i.imgur.com/9QT1wVS.png" width="250" />
+    <img src="https://i.imgur.com/9QT1wVS.png" width="250px" />
 </center>
 
 Thus, an RNN must be able to remember data seen previously, often for long distances, and a variant of RNN called LSTM, does this particularly well. What does this have to do with proteins? Proteins are structures in 3D space. Thus, it is rich in regions that are close together in 3D space but its residues are far apart in primary sequence.
@@ -53,7 +53,7 @@ The intuition is that the ability of LSTMs to capture these long term dependenci
 An LSTM is defined as follows:  
 
 <center>
-    <img src="https://i.imgur.com/6FIf8M3.png" width="250" />
+    <img src="https://i.imgur.com/6FIf8M3.png" width="250px" />
 </center>
 
 All variables are vectors except for the weight matrices $$W$$. The notation of $$[a, b]$$ means to stack the column vectors of $$a$$ and $$b$$ vertically. $$\sigma()$$ is the sigmoid activation function.  
@@ -84,13 +84,13 @@ Unlike the RNN where the training set can be any text file, the inputs to an ora
 ### Final Model - AdaBoost
 After comparing the performances of many model types (LSTM, SVM, GP, CNN, Linear), we found that AdaBoost regressors demonstrated excellent performance on the training set and decent performance on the validation set. We trained a series of AdaBoost regressors on 60% of the 19 PETase sequences and tested their performance on the remaining 40%. We explore the model performance on varying number of estimators.
 <center>
-    <img src="https://i.imgur.com/Rsm9skH.png" width="250" />
+    <img src="https://i.imgur.com/Rsm9skH.png" width="250px" />
 </center>
 
 The AdaBoost model has the advantage that it fits the training data rapidly. The error on the test data is low, considering that those were sequences never seen before, and that the range of possible predictions are from 0 to 3.4. Taking a look at the 19th regressor, we see the following:
 
 <center>
-    <img src="https://i.imgur.com/fk0RN7P.png" width="250" />
+    <img src="https://i.imgur.com/fk0RN7P.png" width="250px" />
 </center>
 
 The $$R^2$$ for the training data is 0.9986 and the $$R^2$$ for the testing data is 0.5378.   
@@ -98,7 +98,7 @@ The $$R^2$$ for the training data is 0.9986 and the $$R^2$$ for the testing data
 As a further test, we computed $$k$$-fold cross-validation loss for $$k=1$$. 
 
 <center>
-    <img src="https://i.imgur.com/26oMwGp.png" width="250" />
+    <img src="https://i.imgur.com/26oMwGp.png" width="250px" />
 </center>
 
 Here, the cross validation loss serves as a proxy for the average uncertainty in the model's predictions. It is important to keep the uncertainty of the model in mind while evaluating sequence function. 
@@ -137,7 +137,7 @@ In step 4, the indicator function $$\mathbb{I}\{ h_t(\mathbf{x}^{(n)}) \neq t^{(
 ## 4. Optimization Algorithm
 Equipped with a generative model suitable for protein sequence generation, and a decent discriminative model for protein sequence evaluation, we can build our optimization workflow, shown below.
 <center>
-    <img src="https://i.imgur.com/e9OSZ7i.png" width="250" />
+    <img src="https://i.imgur.com/e9OSZ7i.png" width="250px" />
 </center>
 
 First generate sequences based on existing sequence to function data. Then, score those sequences and only keep those that score beyond a preset threshold. Finally, add the high scoring sequences back into the training set and retrain the RNN to generate new sequences. Iterate until convergence or experimental verification.
@@ -155,13 +155,13 @@ Comments are provided in the notebooks on how to reproduce results in this artic
 Biswas et al. developed a composite residues model for the prediction of GFP function from sequence. We trained an [implementation](https://github.com/krdav/Composite-Residues_keras_implementation) of their model on 80% of about 58000 GFP sequences. We then retrained the last two layers of the neural network on PETase sequences. Due to the much smaller dataset for PETase, we observe chaotic behaviour in the validation loss.
 
 <center>
-    <img src="https://i.imgur.com/iiJPLpE.png" width="250" />
+    <img src="https://i.imgur.com/iiJPLpE.png" width="250px" />
 </center>
 
 After transfer learning, the validation loss becomes much more controlled:
 
 <center>
-    <img src="https://i.imgur.com/Sax60x6.png" width="250" />
+    <img src="https://i.imgur.com/Sax60x6.png" width="250px" />
 </center>
 
 As a test of the applicability of transfer learning, we incorporated it as part of an oracle in the design algorithm described by Brookes et al [here](https://arxiv.org/pdf/1901.10060).   
@@ -169,7 +169,7 @@ As a test of the applicability of transfer learning, we incorporated it as part 
 Though GFP is far from a hydrolase, its strength is in the amount of data available. A classic example in computer vision is that you can first train a neural network on millions of cat pictures on the internet, then fine tune on much smaller datasets of radiology images.
 
 <center>
-    <img src="https://i.imgur.com/Z1tFhyi.jpg" width="250" />
+    <img src="https://i.imgur.com/Z1tFhyi.jpg" width="250px" />
 </center>
 
 The network can identify the low-level features like edges and texture in the first few layers, which we can reuse for training models for cancer detection. Perhaps we can first find patterns underlying all protein sequences, then fine tune to specific classes of proteins like PETase. In effect, transfer learning allows the oracle to make predictions based on much more data than just 19 sequences since it was first trained on 58000 GFP sequences.  
@@ -185,7 +185,7 @@ Another important feature of their model is that they use a Gaussian Process in 
 A sequence alignment of this algorithm's final output to the wildtype PETase is show below:  
 
 <center>
-    <img src="https://i.imgur.com/2jcHjGP.png" width="250" />
+    <img src="https://i.imgur.com/2jcHjGP.png" width="250px" />
 </center>
 
 For the mutated residues, notice the large number of ':' which denote residues with strongly similar properties. Each colour denotes a different residue type, and the alignment somewhat shows local conservation among residue types. Globally, it appears the distribution of residue frequencies is also conserved, with red (hydrophobic) and green (hydroxy/sulfhydryl/amine) taking the majority and blue (basic) taking the minority.
@@ -198,7 +198,7 @@ For the mutated residues, notice the large number of ':' which denote residues w
 
 We found an interesting train/test loss plot from a 16-unit LSTM regression model that may be worth exploring further:
 <center>
-    <img src="https://i.imgur.com/i6BZHoL.png" width="250" />
+    <img src="https://i.imgur.com/i6BZHoL.png" width="250px" />
 </center>
 
 where Hydrophobic embeddings are encoded by the indices, starting at 1, of the following ordered string `FIWLVMYCATHGSQRKNEPD`, which is all the amino acids ordered from most to least hydrophobic at pH 7. For example, `M` would be encoded as a 6.
@@ -232,7 +232,7 @@ https://github.com/MauriceR71/UniRep
 
 `petase_seqs.txt`: The 19 PETase sequences that serves as the training set for the RNN  
 
-`blast.txt`: 250 sequences most similar to wildtype PETase obtained by a BLAST search. This may also be used as a training set for the RNN  
+`blast.txt`: 250px sequences most similar to wildtype PETase obtained by a BLAST search. This may also be used as a training set for the RNN  
 
 `petase_seqvecs.npy`: Numpy array of shape (19, 64, 3) that is the output of UniRep's `get_rep()` function for 19 PETase sequences.  
 
