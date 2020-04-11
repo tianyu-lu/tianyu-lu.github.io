@@ -17,7 +17,7 @@ We present a generalizable and automated pipeline for protein design. Our model 
 
 ## 2. Generative Model
 ### Intuition
-We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $\mathbf{x}_i$ are the input vectors, the boxes in $A$ are described in more detail in the Formal Definition section, and the $\mathbf{h}_i$ are the outputs for each cell.
+We will use a Recurrent Neural Network as a generative model. The structure of an RNN is shown below. The $$\mathbf{x}_i$$ are the input vectors, the boxes in $$A$$ are described in more detail in the Formal Definition section, and the $$\mathbf{h}_i$$ are the outputs for each cell.
 
 <center>
     <img src="https://i.imgur.com/zMIkiPH.png" width="350" />
@@ -58,11 +58,11 @@ An LSTM is defined as follows:
     <img src="https://i.imgur.com/6FIf8M3.png" width="350" />
 </center>
 
-All variables are vectors except for the weight matrices $W$. The notation of $[a, b]$ means to stack the column vectors of $a$ and $b$ vertically. $\sigma()$ is the sigmoid activation function.  
+All variables are vectors except for the weight matrices $$W$$. The notation of $$[a, b]$$ means to stack the column vectors of $$a$$ and $$b$$ vertically. $$\sigma()$$ is the sigmoid activation function.  
 
-The result of (1), $\tilde{c}^{<t>}$, can be interpreted as the data to remember for the current cell. Equations (2), (3), and (4) output vectors which can be thought of as gates, where (2) is the update gate, (3) is the forget gate, and (4) is the output gate. Since $\sigma(z) \in (0, 1) \forall z \in \mathbb{R}$, the gamma scalars can be thought of as percentages. In (5), we multiply $\tilde{c}^{<t>}$ by $\Gamma_u$ element-wise to determine what percentage of each element of the new data to remember. We also multiply $c^{<t-1>}$, the memory state of the previous time step, by $\Gamma_f$ element-wise to determine what percentage of the previous memory to forget. Then, we see that $c^{<t>}$ is a combination of old and new memory, where their proportions are determined by learnable gates. Finally, we need to determine the input to the next cell by equation (6).  
+The result of (1), $$\tilde{c}^{<t>}$$, can be interpreted as the data to remember for the current cell. Equations (2), (3), and (4) output vectors which can be thought of as gates, where (2) is the update gate, (3) is the forget gate, and (4) is the output gate. Since $$\sigma(z) \in (0, 1) \forall z \in \mathbb{R}$$, the gamma scalars can be thought of as percentages. In (5), we multiply $$\tilde{c}^{<t>}$$ by $$\Gamma_u$$ element-wise to determine what percentage of each element of the new data to remember. We also multiply $$c^{<t-1>}$$, the memory state of the previous time step, by $$\Gamma_f$$ element-wise to determine what percentage of the previous memory to forget. Then, we see that $$c^{<t>}$$ is a combination of old and new memory, where their proportions are determined by learnable gates. Finally, we need to determine the input to the next cell by equation (6).  
 
-Thus, we can see that at each time step, the input data is $x^{<t>}$, the main output of each cell is $a^{<t>}$, and the $c^{<t>}$ is the memory state that is able to capture long term dependencies.
+Thus, we can see that at each time step, the input data is $$x^{<t>}$$, the main output of each cell is $$a^{<t>}$$, and the $$c^{<t>}$$ is the memory state that is able to capture long term dependencies.
 
 ### Code
 The code for sequence generation was adapted from [here.](https://www.tensorflow.org/tutorials/text/text_generation) For training data, we collected 19 PETase sequence function pairs through a literature search. Parsed sequences are available [here](https://github.com/MauriceR71/UniRep) as `petase_seqs.txt` We wrote a wrapper function, `run_RNN()` that generated new protein sequences after training on a file specified in its input parameters. Our function only returns sequences that passes a set of filters, defined in the function `passes_filters()`. These filters include  
@@ -78,7 +78,7 @@ A sequence to function model allows us to predict the fitness of a protein seque
 In particular, we don't want the model to overfit, i.e. an overcomplicated model. An analogy can be a student preparing for a math test by memorizing the answers to homework questions. Clearly such a student would not perform well on the test. Also, we don't want the model to underfit, i.e. a model that is too simple.
 
 ### Model Evaluation
-As explained in the intuition, our goal is to search for a model that has low validation and test errors. A nice way to present this is by plotting the actual catalytic activity versus the predicted activity. A perfect model would coincide the line $y=x$. We can measure this using the correlation coefficient, $R^2$.
+As explained in the intuition, our goal is to search for a model that has low validation and test errors. A nice way to present this is by plotting the actual catalytic activity versus the predicted activity. A perfect model would coincide the line $$y=x$$. We can measure this using the correlation coefficient, $$R^2$$.
 
 ### UniRep
 Unlike the RNN where the training set can be any text file, the inputs to an oracle must be processed to be of the same size. Unfortunately, such a task for protein sequences is nontrivial. As an example, the hydrolase class of protein sequences have lengths that range from 200 to 1400 amino acids. For a pipeline to be generalizable, it must be able to convert all protein sequences to the same size. Such a problem can be again solved by RNNs. Notice that the size of the output vector for each unit is the same. The size of the protein sequence then, is controlled by the number of recurrent cells, one for each amino acid. More interestingly, Alley et al. found in [their paper](https://www.biorxiv.org/content/biorxiv/early/2019/03/26/589333.full.pdf) that some neurons in these protein encoding RNNs actually encode information about the sequence's secondary structure, while their training set included no information about secondary structure. Their model is called UniRep and turns any protein sequence of any length into a 64-dimensional vector. 
@@ -95,9 +95,9 @@ The AdaBoost model has the advantage that it fits the training data rapidly. The
     <img src="https://i.imgur.com/fk0RN7P.png" width="350" />
 </center>
 
-The $R^2$ for the training data is 0.9986 and the $R^2$ for the testing data is 0.5378.   
+The $$R^2$$ for the training data is 0.9986 and the $$R^2$$ for the testing data is 0.5378.   
 
-As a further test, we computed $k$-fold cross-validation loss for $k=1$. 
+As a further test, we computed $$k$$-fold cross-validation loss for $$k=1$$. 
 
 <center>
     <img src="https://i.imgur.com/26oMwGp.png" width="350" />
@@ -113,27 +113,27 @@ For simplicity, let's assume we wish to train a model that outputs if an image s
 The algorithm starts with one weak classifier, evaluates its predictions, and collects the examples that were misclassified. It then trains a second weak classifier, but this time, penalizing those misclassified examples more. Intuitively, the algorithm is learning from its mistakes.
 
 ### AdaBoost Formal Definition
-Let the input data be $\mathcal{D}_N = \{ \mathbf{x}^{(n)}, t^{(n)} \}_{n=1}^N$, where $t^{(n)} \in (-\inf, +\inf)$. A classifier $h$ maps input vectors to their values, i.e. $h:\mathbf{x}\rightarrow (-\inf, +\inf)$. Define a loss function, in our case we used the linear loss function, as follows:  
+Let the input data be $$\mathcal{D}_N = \{ \mathbf{x}^{(n)}, t^{(n)} \}_{n=1}^N$$, where $$t^{(n)} \in (-\inf, +\inf)$$. A classifier $$h$$ maps input vectors to their values, i.e. $$h:\mathbf{x}\rightarrow (-\inf, +\inf)$$. Define a loss function, in our case we used the linear loss function, as follows:  
 
 <center>
     <img src="https://i.imgur.com/iKPNRT4.png" width="230" height="70" />
 </center>  
 
-where the denominator ensures the loss is in $[0, 1]$. The following is the AdaBoost algorithm. The formulation is slightly different from that in the original paper, but the idea remains the same.  
+where the denominator ensures the loss is in $$[0, 1]$$. The following is the AdaBoost algorithm. The formulation is slightly different from that in the original paper, but the idea remains the same.  
 
-Let each sample have its associated weight, $w^{(n)} = \frac{1}{N}$, where $n = 1, \cdots , N$. Let $T$ be the number of estimators. Then for $t = 1, \cdots , T$, do the following:  
+Let each sample have its associated weight, $$w^{(n)} = \frac{1}{N}$$, where $$n = 1, \cdots , N$$. Let $$T$$ be the number of estimators. Then for $$t = 1, \cdots , T$$, do the following:  
 
-1. Let $h_t = \text{argmin}_{h}\sum\limits_{n=1}^{N}w^{(n)}\mathcal{L}(h)$
-2. Let $\text{err}_t = \Bigg[\sum\limits_{n=1}^{N}w^{(n)}\mathcal{L}(h_t)\Bigg] \Big/ \Bigg[\sum\limits_{n=1}^{N}w^{(n)}\Bigg]$, the weighted error.
-3. Let $\alpha_t = \frac{1}{2}\text{log}\frac{1 - \text{err}_t}{\text{err}_t}$, the classifier coefficient. $(\alpha \in (0, \infty))$
-4. Update weights by $w^{(n)} \leftarrow w^{(n)}\text{exp}\Big( 2\alpha_t \mathbb{I}\{ h_t(\mathbf{x}^{(n)}) \neq t^{(n)} \} \Big)$
+1. Let $$h_t = \text{argmin}_{h}\sum\limits_{n=1}^{N}w^{(n)}\mathcal{L}(h)$$
+2. Let $$\text{err}_t = \Bigg[\sum\limits_{n=1}^{N}w^{(n)}\mathcal{L}(h_t)\Bigg] \Big/ \Bigg[\sum\limits_{n=1}^{N}w^{(n)}\Bigg]$$, the weighted error.
+3. Let $$\alpha_t = \frac{1}{2}\text{log}\frac{1 - \text{err}_t}{\text{err}_t}$$, the classifier coefficient. $$(\alpha \in (0, \infty))$$
+4. Update weights by $$w^{(n)} \leftarrow w^{(n)}\text{exp}\Big( 2\alpha_t \mathbb{I}\{ h_t(\mathbf{x}^{(n)}) \neq t^{(n)} \} \Big)$$
 
-The final regressor is a linear combination of the weak learners by $H(\mathbf{x}) = \sum\limits_{t=1}^{T}\Big( \alpha_t h_t (\mathbf{x}) \Big)$
+The final regressor is a linear combination of the weak learners by $$H(\mathbf{x}) = \sum\limits_{t=1}^{T}\Big( \alpha_t h_t (\mathbf{x}) \Big)$$
 
-$h_t$ is the weak classifier. Its examples are weighted by the set of weights $w^{(n)}$, where a higher $w^{(n)}$ increases the loss $\mathcal{L}(h)$ more, making those examples weighted more heavily.   
-$err_t$ is the error rate for that particular weak classifier, $h_t$ found in step 1. The denominator is there to normalize $err_t$ between 0 and 1.  
-$\alpha_t$ is a measure of how accurate the particular classifier, $h_t$ is. If $err_t$ is low, i.e. near 0, $\alpha_t \rightarrow +\infty$, indicating a very accurate model. If $err_t$ is high, i.e. near 0.5, $\alpha_t \rightarrow 0$, indicating an inaccurate model.  
-In step 4, the indicator function $\mathbb{I}\{ h_t(\mathbf{x}^{(n)}) \neq t^{(n)} \}$ is 1 if the prediction is wrong, and is 0 if the prediction is correct. Thus, weights increase when the labels are misclassified.
+$$h_t$$ is the weak classifier. Its examples are weighted by the set of weights $$w^{(n)}$$, where a higher $$w^{(n)}$$ increases the loss $$\mathcal{L}(h)$$ more, making those examples weighted more heavily.   
+$$err_t$$ is the error rate for that particular weak classifier, $$h_t$$ found in step 1. The denominator is there to normalize $$err_t$$ between 0 and 1.  
+$$\alpha_t$$ is a measure of how accurate the particular classifier, $$h_t$$ is. If $$err_t$$ is low, i.e. near 0, $$\alpha_t \rightarrow +\infty$$, indicating a very accurate model. If $$err_t$$ is high, i.e. near 0.5, $$\alpha_t \rightarrow 0$$, indicating an inaccurate model.  
+In step 4, the indicator function $$\mathbb{I}\{ h_t(\mathbf{x}^{(n)}) \neq t^{(n)} \}$$ is 1 if the prediction is wrong, and is 0 if the prediction is correct. Thus, weights increase when the labels are misclassified.
 
 
 ## 4. Optimization Algorithm

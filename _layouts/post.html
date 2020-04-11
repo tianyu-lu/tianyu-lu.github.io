@@ -5,14 +5,6 @@ archive: false
 post_class: post-template
 ---
 
-<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover }}) {%else%}no-cover{% endif %}">
-    <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
-        <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
-        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
-    </nav>
-
-</header>
-
 {% include head.html %}
 
 <main class="content" role="main">
@@ -63,35 +55,8 @@ post_class: post-template
         </section>
         {% endif %}
 
-        <footer class="post-footer">
-            <!-- If we want to display author's name and bio -->
-            {% if site.author %}
-                <figure class="author-image">
-                    <a class="img" href="{{ site.baseurl }}" style="background-image: url(/assets/images/profile.png)">
-                    <span class="hidden">{{site.author}}'s Picture</span></a>
-                </figure>
-                <section class="author">
-                    <!-- Author Name -->
-                    <h4> {{ site.author }} </h4>
-                    <!-- Author Bio -->
-                    <p>
-                        Here goes the author description. You might want to place some links too in here
-                    </p>
-                </section>
-            {% endif %}
-
-            <!-- Share links section -->
-            {% include share.html %}
-
-            <!-- Disqus comments -->
-            {% if page.disqus %}
-                {% include disqus.html %}
-            {% endif %}
-
-        </footer>
+        {% include footer.html %}
 
     </article>
 
 </main>
-
-{% include footer.html %}
