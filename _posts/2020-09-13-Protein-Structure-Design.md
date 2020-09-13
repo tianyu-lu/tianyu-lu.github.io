@@ -12,5 +12,4 @@ Summary of work done with Prof. Philip Kim on protein design.
 
 ### Protein Backbone Search and Design
 
-<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=[https://www.tianyu-lu.github.io/Backbones.pptx]' width='100%' height='600px' frameborder='0'>
-
+<iframe width="100%" height="630" src="docs.google.com/viewer?url=1IxgZgc99K2wQ66I0NrPcZn1ejjj-UW5q&embedded=true" ></iframe>
