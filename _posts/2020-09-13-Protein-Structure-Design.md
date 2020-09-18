@@ -38,6 +38,12 @@ Each of the following files were modified to extend MaSIF's preprocessing to DNA
 2. The order of `import pymesh` with other import statements matters. Pymesh should be imported first.
 3. `results.out` does not record which of the two ebox patchs the fingerprint matches.
 4. The code has only been tested on individual chains of PDB structures. Nevertheless, the code should still work for matching surfaces of dimers, trimers, etc.
+5. On Compute Canada, you must have numpy version 1.16.1, otherwise some imports will not work. If you encounter this error `Could not install packages due to an EnvironmentError: Could not find a suitable TLS CA certificate bundle, invalid path: /etc/pki/tls/certs/ca-bundle.crt`, you can email Compute Canada and have someone give you a copy of the `CC ca.bundle.crt`. After that, running ```
+singularity run docker://pablogainza/masif
+export REQUESTS_CA_BUNDLE="/home/<USERNAME>/.config/pip/ca-bundle.crt"
+pip3.6 install --upgrade --user numpy==1.16.1
+```
+should do the trick.
 
 ### Protein Backbone Search and Design Slides
 
