@@ -47,11 +47,11 @@ should do the trick.
 
 ### Protein Backbone Search and Design Slides
 
-<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={4e2f50a3-677a-48da-91a2-be9bd8ff47bf}&amp;action=embedview&amp;wdAr=1.7777777777777777&amp;wdEaa=1" width="962px" height="565px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={4e2f50a3-677a-48da-91a2-be9bd8ff47bf}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
 
 ### Classical Protein Design Pipeline
 
 Steps involved in generating protein sequences to optimize binding affinity to another protein. Covers docking with HADDOCK, molecular dynamics simulations with GROMACS, simulated annealing in RosettaDesign, and free energy calculations using non-equilibrium MD for filtering.
 
-<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={8fa06acd-7e34-4059-88ff-68011c50000e}&amp;action=embedview&amp;wdAr=1.7777777777777777&amp;wdEaa=1" width="962px" height="565px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={8fa06acd-7e34-4059-88ff-68011c50000e}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
 
