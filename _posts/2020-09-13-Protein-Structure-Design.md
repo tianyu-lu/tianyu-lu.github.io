@@ -12,7 +12,7 @@ Walkthrough of how to use MaSIF to search for DNA mimicking proteins in the PDB.
 
 ### MaSIF Search
 
-All the necessary code is bundled in `masif.tar.gz`. The main script is `get_mimics_surf.py` which runs all the preprocessing steps required to generate MaSIF fingerprints for each pdb file in the current working directory. On Compute Canada, the shell script to submit is `get_surf.sh`. This script starts a Singularity container (the Docker equivalent on Compute Canada) and runs `get_mimics_surf.py`. Currently the script records in `results.out` the residue indices that are covered by the five patches with the smallest Euclidean distance to ebox fingerprints, along with the pdb id the patches belong to and the Euclidean distances. The two ebox fingerprints have indices 274 and 2333 (line 183 of `get_mimics_surf.py`). Visualized below, these are the patches that interact with Myc and Max. 
+All the necessary code can be found here: https://github.com/tianyu-lu/protein-design. The main script is `get_mimics_surf.py` which runs all the preprocessing steps required to generate MaSIF fingerprints for each pdb file in the current working directory. On Compute Canada, the shell script to submit is `get_surf.sh`. This script starts a Singularity container (the Docker equivalent on Compute Canada) and runs `get_mimics_surf.py`. Currently the script records in `results.out` the residue indices that are covered by the five patches with the smallest Euclidean distance to ebox fingerprints, along with the pdb id the patches belong to and the Euclidean distances. The two ebox fingerprints have indices 274 and 2333 (line 183 of `get_mimics_surf.py`). Visualized below, these are the patches that interact with Myc and Max. 
 
 ### Input Features for DNA Surfaces
 

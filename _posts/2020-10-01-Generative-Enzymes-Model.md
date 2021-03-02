@@ -10,7 +10,7 @@ Adapting the CbAS algorithm to generate plastic degrading enzymes with informati
 
 <!--more-->
 
-Animation of the <a href="https://arxiv.org/abs/1901.10060">CbAS</a> algorithm by <a href="https://yinqihuang.myportfolio.com/">Yinqi Huang</a>:
+Animation of the <a href="https://arxiv.org/abs/1901.10060">CbAS</a> algorithm by <a href="https://github.com/yinqihuang">Yinqi Huang</a>:
 
 <img src="/assets/images/cbas_smooth.gif">
 
