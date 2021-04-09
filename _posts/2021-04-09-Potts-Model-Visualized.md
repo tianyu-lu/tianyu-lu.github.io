@@ -14,7 +14,7 @@ Inspired by [The Illustrated Transformer](http://jalammar.github.io/illustrated-
 
 Proteins are linear chains of molecules known as amino acids. There are 20 commonly occurring amino acids represented by twenty letters of the English alphabet A-Z except for `BJOUXZ`. To account for insertions and deletions, we include an additional letter '-' representing an amino acid of length zero. These amino acids are chained together in a string, so a single protein chain can be described by a string of letters such as `MNFPRATANCSLQPLD`. Many proteins fold into 3-dimensional structures as shown below (the structures shown are interactive).
 
-<div id="protein" style="height: 100px;">
+<div id="protein" style="height: 500px;">
 	<script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
 	<script>
 	    document.addEventListener("DOMContentLoaded", function () {
@@ -89,7 +89,7 @@ Notably, the **J** parameter captures pairwise correlations. However, just looki
 
 We can visualize these predicted contacts on the structure of a protein in this homologous family. First let's see the actual contacts:
 
-<div id="protein" style="height: 100px;">
+<div id="protein" style="height: 500px;">
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
@@ -116,7 +116,7 @@ We can visualize these predicted contacts on the structure of a protein in this 
 
 Then let's see the predicted contacts in red sticks:
 
-<div id="protein" style="height: 100px;">
+<div id="protein" style="height: 500px;">
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
