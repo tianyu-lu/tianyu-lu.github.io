@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Tianyu Lu - Computation and Biology</title>
+    <meta name="description" content="Tianyu Lu, Computational Biology" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="">Home</a>
+        <a class="subscribe-button icon-feed" href="feed.xml">Subscribe</a>
+    </nav>
+
+    <!-- Load KaTeX -->
+	<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script> -->
+
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+</header>
+
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Potts-Model-Visualized</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2021-04-09">09 Apr 2021</time>
+                
+                    on Communication, Protein, and ML
+                
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="blog url">
+                
+                    <img src="true" alt="Tianyu Lu" />
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2021-04-09">09 Apr 2021</time>
+            
+                on Communication, Protein, and ML
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Potts-Model-Visualized</h1> -->
+
+        <section class="post-content">
+            <p>Inspired by <a href="http://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a>, this post unpacks the symbols behind a Potts Model and visualizes how its parameters help us understand the evolution of protein sequence and structure.</p>
+
+<!--more-->
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Proteins are linear chains of molecules known as amino acids. There are 20 commonly occurring amino acids represented by twenty letters of the English alphabet A-Z except for <code class="language-plaintext highlighter-rouge">BJOUXZ</code>. To account for insertions and deletions, we include an additional letter ‘-‘ representing an amino acid of length zero. These amino acids are chained together in a string, so a single protein chain can be described by a string of letters such as <code class="language-plaintext highlighter-rouge">MNFPRATANCSLQPLD</code>. Many proteins fold into 3-dimensional structures as shown below (the structures shown are interactive).</p>
+
+<p align="center">
+<div id="protein">
+	<script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
+	<script>
+	    document.addEventListener("DOMContentLoaded", function () {
+	    // create a `stage` object
+	    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+	    // Handle window resizing
+	    window.addEventListener( "resize", function( event ){
+	        stage.handleResize();
+	    }, false );
+	    // load a PDB structure and consume the returned `Promise`
+	    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+	    // add a "cartoon" representation to the structure component
+	    // component.addRepresentation("cartoon");
+	    // provide a "good" view of the structure
+	    o.addRepresentation("cartoon", { color: "residueindex" })
+	    o.addRepresentation("ball+stick", { sele: "ligand" })
+	    // o.addRepresentation("contact")
+	    o.autoView();
+	    stage.animationControls.spinComponent(o, [0,1,0])
+	    });
+	    });
+	</script>
+	<div id="viewport"></div>
+</div>
+</p>
+
+<p>Such complicated twists and turns can be represented as a distance matrix, where entry row i and column j is the distance between residue i and residue j. Distance matrices can be binarized into a contact map where every entry in the matrix is either 0 or 1. If the entry in row i and column j of the contact map is 1, it represents that amino acid i is “in contact” with amino acid j. “In contact” usually means that the two amino acids are within some distance apart, usually 6 Angstroms. To get a sense of how small this is, it is about 1 millionth the width of a human hair. The distance matrix and contact map of protein 6EQD is shown below.</p>
+
+<p align="center">
+  <img src="/assets/images/dist_cont.PNG" alt="dist and contact" style="width:100%" />
+</p>
+
+<h2 id="evolutionary-constraints">Evolutionary Constraints</h2>
+
+<p>A Potts model is a probabilistic model. For protein sequences, it is usually used to model a homologous set of sequences, i.e. sequences which likely evolved from one ancestral protein sequence. But what do we mean by “model”? A Potts model assigns each sequence a number which represents how likely that sequence belongs to this homologous set. Sequences in the homologous set are clearly likely to belong to the homologous set so they should be assigned high likelihoods. So why doesn’t the model just memorize all the homologous sequences, give them high likelihoods, and call it a day? We prevent this from happening by using a held-out set of sequences which the model does not see, and enforce the model to also have high likelihood on those sequences too. This simple setup allows Potts models to infer protein structure from sequence information alone. How?</p>
+
+<p>First let’s try to reason about how the evolution of protein sequences work. The structural proximity of two amino acids can impose constraints on what mutations are allowable. For example, as shown in the figure below, we can see that certain amino acids are not allowed in the case of charged amino acids. This implies that by finding pairs of amino acids which evolve together (coevolve), rather than evolving independently, we can infer that these two positions are likely to be structurally adjacent. As an example, we can see the figure below which shows coevolution between the two blue positions.</p>
+
+<p>Somehow the information of coevolving residues need to be captured in the Potts model. A Potts model does this by capturing the sitewise and pairwise frequencies in the sequence data. Sitewise means for some position i along the sequence, what are the probabilities of all the possible amino acids at that position. Pairwise means for some pair of positions i and j, what are the probabilities of all 21 by 21 pairs of amino acids in those two positions. It’s able to do this owing to an important concept in machine learning: inductive bias. The parameters of a Potts model directly correspond to the notion of capturing sitewise and pairwise frequencies, thus making them interpretable.</p>
+
+<h2 id="potts-model-parameters">Potts Model Parameters</h2>
+
+<p>Now let’s take a look at the parameters of the model. The <strong>J</strong> parameter is a (L by 21) by (L by 21) matrix that looks like this:</p>
+
+<p align="center">
+  <img src="/assets/images/potts_j.PNG" alt="pottsj" style="width:100%" />
+</p>
+
+<p>The 21x21 square shown models the pairwise frequencies of all possible 21x21 pairs of amino acids for amino acid positions 6 and 3. L = 10 in this example.</p>
+
+<p>It also includes a parameter <strong>h</strong> which models the sitewise frequencies of sequences, looking like this:</p>
+
+<p align="center">
+  <img src="/assets/images/potts_h.PNG" alt="pottsh" style="width:80%" />
+</p>
+
+<p>L = 10 in this example. For example, row 2 models the frequencies of the 21 amino acids (including gap) at position 2.</p>
+
+<p>The input to a Potts model is a multiple sequence alignment. Conversion of a multiple sequence alignment to a numerical representation on the computer simply maps each amino acid to an integer between 0 and 20 inclusive. An example looks like this:</p>
+
+<p align="center">
+  <img src="/assets/images/potts_input.PNG" alt="pottsin" style="width:80%" />
+</p>
+
+<p>Here a pairwise correlation is shown in red and green. A Potts model should then predict these two positions as being in contact.</p>
+
+<p>Notably, the <strong>J</strong> parameter captures pairwise correlations. However, just looking at the correlations between amino acid pairs is not enough. If A and B coevolve, but B and C also coevolve, this means A and C coevolve as well but they are not necessarily structurally adjacent. This phenomenon known as chaining needs to be disentangled from actual structurally adjacent pairs. To do this, we reduce the (L by 21) by (L by 21) matrix <strong>J</strong> into an L by L matrix by taking the sum of each 21 by 21 grid (green grid in the figure showing parameter <strong>J</strong>). Only after applying average product correction (APC) sifts out “direct couplings” from correlations from amino acids which show correlation but are not actually in contact. By only keeping the direct couplings, the patterns of protein contacts emerge.</p>
+
+<p align="center">
+  <img src="/assets/images/apc.png" alt="apc" style="width:85%" />
+</p>
+
+<p>We can visualize these predicted contacts on the structure of a protein in this homologous family. First let’s see the actual contacts:</p>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // create a `stage` object
+    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    // Handle window resizing
+    window.addEventListener( "resize", function( event ){
+        stage.handleResize();
+    }, false );
+    // load a PDB structure and consume the returned `Promise`
+    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+    // add a "cartoon" representation to the structure component
+    // component.addRepresentation("cartoon");
+    // provide a "good" view of the structure
+    o.addRepresentation("cartoon", { color: "residueindex" })
+    o.addRepresentation("ball+stick", { sele: "ligand" })
+    o.addRepresentation("contact")
+    o.autoView();
+    stage.animationControls.spinComponent(o, [0,1,0])
+    });
+    });
+</script>
+<div id="viewport"></div>
+
+Then let's see the predicted contacts in red sticks:
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // create a `stage` object
+    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    var atomPair = [
+	    [7, 49],
+		[9, 47],
+		[38, 50],
+		[44, 217],
+		[64, 71],
+		[104, 128],
+		[106, 129],
+		[107, 117],
+		[117, 130],
+		[158, 186],
+		[158, 188],
+		[159, 191],
+		[172, 184]
+	  ]
+    // Handle window resizing
+    window.addEventListener( "resize", function( event ){
+        stage.handleResize();
+    }, false );
+    // load a PDB structure and consume the returned `Promise`
+    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+    // add a "cartoon" representation to the structure component
+    // component.addRepresentation("cartoon");
+    // provide a "good" view of the structure
+    o.addRepresentation("cartoon", { color: "residueindex" })
+    o.addRepresentation("ball+stick", { sele: "ligand" })
+    o.addRepresentation("distance", {
+	    atomPair: atomPair,
+	    color: "red",
+	    labelUnit: "na"
+	  })
+    o.autoView();
+    // stage.animationControls.spinComponent(o, [0,1,0])
+    });
+    });
+</script>
+<div id="viewport"></div>	 -->
+
+<p>An excellent PyTorch implementation of training such a model can be found <a href="https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb">here</a>.</p>
+
+<h2 id="references">References</h2>
+
+<p>Balakrishnan, Sivaraman, et al. “Learning generative models for protein fold families.” Proteins: Structure, Function, and Bioinformatics 79.4 (2011): 1061-1078.</p>
+
+<p>Ekeberg, Magnus, et al. “Improved contact prediction in proteins: using pseudolikelihoods to infer Potts models.” Physical Review E 87.1 (2013): 012707.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+
+    <!-- Parse the Latex divs with Katex-->
+    <script type="text/javascript">
+      $("script[type='math/tex']").replaceWith(
+        function(){
+          var tex = $(this).text();
+          return katex.renderToString(tex, {displayMode: false});
+      });
+      
+      $("script[type='math/tex; mode=display']").replaceWith(
+        function(){
+          var tex = $(this).text();
+          return katex.renderToString(tex.replace(/%.*/g, ''), {displayMode: true});
+      });
+    </script>
+
+    <!-- If we want to display author's name and bio -->
+    
+        <figure class="author-image">
+            <a class="img" href="" style="background-image: url(/assets/images/profile.png)">
+            <span class="hidden">Tianyu Lu's Picture</span></a>
+        </figure>
+        <section class="author">
+            <!-- Author Name -->
+            <h4> Tianyu Lu </h4>
+            <!-- Author Bio -->
+            <p>
+                Twitter: <a href="https://twitter.com/tianyu_lu">@Tianyu_Lu</a>
+                <a href="/resume/resume.html">Resume</a>
+            </p>
+        </section>
+    
+
+    <!-- Share links section -->
+    <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Potts-Model-Visualized&amp;url=http://tianyu-lu.github.io/communication/protein/ml/2021/04/09/Potts-Model-Visualized.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://tianyu-lu.github.io/communication/protein/ml/2021/04/09/Potts-Model-Visualized.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://tianyu-lu.github.io/communication/protein/ml/2021/04/09/Potts-Model-Visualized.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    <!-- Disqus comments -->
+    
+
+</footer>
+
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="">Tianyu Lu</a> &copy; 
+              2021 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>
