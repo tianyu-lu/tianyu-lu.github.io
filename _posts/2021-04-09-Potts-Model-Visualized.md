@@ -15,6 +15,7 @@ Inspired by [The Illustrated Transformer](http://jalammar.github.io/illustrated-
 Proteins are linear chains of molecules known as amino acids. There are 20 commonly occurring amino acids represented by twenty letters of the English alphabet A-Z except for `BJOUXZ`. To account for insertions and deletions, we include an additional letter '-' representing an amino acid of length zero. These amino acids are chained together in a string, so a single protein chain can be described by a string of letters such as `MNFPRATANCSLQPLD`. Many proteins fold into 3-dimensional structures as shown below (the structures shown are interactive).
 
 <script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
@@ -39,12 +40,13 @@ Proteins are linear chains of molecules known as amino acids. There are 20 commo
     });
     });
 </script>
+
 <div id="viewport"></div>
 
 Such complicated twists and turns can be represented as a distance matrix, where entry row i and column j is the distance between residue i and residue j. Distance matrices can be binarized into a contact map where every entry in the matrix is either 0 or 1. If the entry in row i and column j of the contact map is 1, it represents that amino acid i is “in contact” with amino acid j. “In contact” usually means that the two amino acids are within some distance apart, usually 6 Angstroms. To get a sense of how small this is, it is about 1 millionth the width of a human hair.
 
 <figure>
-  <img src="assets/images/dist_cont.png" alt="Trulli" style="width:100%">
+  <img src="/assets/images/dist_cont.png" alt="Trulli" style="width:100%">
   <figcaption>Distance matrix and contact map of protein [6EQD](https://www.rcsb.org/structure/6EQD)</figcaption>
 </figure>
 
@@ -61,21 +63,21 @@ Somehow the information of coevolving residues need to be captured in the Potts 
 Now let's take a look at the parameters of the model. The **J** parameter is a (L by 21) by (L by 21) matrix that looks like this:
 
 <figure>
-  <img src="assets/images/potts_j.png" alt="pottsj" style="width:100%">
+  <img src="/assets/images/potts_j.png" alt="pottsj" style="width:100%">
   <figcaption>The 21x21 square shown models the pairwise frequencies of all possible 21x21 pairs of amino acids for amino acid positions 6 and 3. L = 10 in this example.</figcaption>
 </figure>
 
 It also includes a parameter **h** which models the sitewise frequencies of sequences, looking like this:
 
 <figure>
-  <img src="assets/images/potts_h.png" alt="pottsh" style="width:80%">
+  <img src="/assets/images/potts_h.png" alt="pottsh" style="width:80%">
   <figcaption>L = 10 in this example. For example, row 2 models the frequencies of the 21 amino acids (including gap) at position 2.</figcaption>
 </figure>
 
 The input to a Potts model is a multiple sequence alignment, an example looks like this:
 
 <figure>
-  <img src="assets/images/potts_input.png" alt="pottsin" style="width:60%">
+  <img src="/assets/images/potts_input.png" alt="pottsin" style="width:60%">
   <figcaption>Conversion of a multiple sequence alignment to a numerical representation on the computer simply maps each amino acid to an integer between 0 and 20 inclusive.</figcaption>
 </figure>
 
@@ -84,13 +86,12 @@ Here a pairwise correlation is shown in red and green. A Potts model should then
 Notably, the **J** parameter captures pairwise correlations. However, just looking at the correlations between amino acid pairs is not enough. If A and B coevolve, but B and C also coevolve, this means A and C coevolve as well but they are not necessarily structurally adjacent. This phenomenon known as chaining needs to be disentangled from actual structurally adjacent pairs. To do this, we reduce the (L by 21) by (L by 21) matrix **J** into an L by L matrix by taking the sum of each 21 by 21 grid (green grid in the figure showing parameter **J**). Only after applying average product correction (APC) sifts out “direct couplings” from correlations from amino acids which show correlation but are not actually in contact. By only keeping the direct couplings, the patterns of protein contacts emerge.
 
 <figure>
-  <img src="assets/images/apc.png" alt="apc" style="width:85%">
+  <img src="/assets/images/apc.png" alt="apc" style="width:85%">
   <figcaption></figcaption>
 </figure>
 
 We can visualize these predicted contacts on the structure of a protein in this homologous family. First let's see the actual contacts:
 
-<script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
@@ -112,6 +113,7 @@ We can visualize these predicted contacts on the structure of a protein in this 
     });
     });
 </script>
+
 <div id="viewport"></div>
 
 Then let's see the predicted contacts in red sticks:
@@ -156,6 +158,7 @@ Then let's see the predicted contacts in red sticks:
     });
     });
 </script>
+
 <div id="viewport"></div>	
 
 An excellent PyTorch implementation of training such a model can be found [here](https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb).
