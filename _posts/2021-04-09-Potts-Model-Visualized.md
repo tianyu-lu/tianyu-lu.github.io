@@ -26,7 +26,7 @@ Proteins are linear chains of molecules known as amino acids. There are 20 commo
 	        stage.handleResize();
 	    }, false );
 	    // load a PDB structure and consume the returned `Promise`
-	    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+	    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
 	    // add a "cartoon" representation to the structure component
 	    // component.addRepresentation("cartoon");
 	    // provide a "good" view of the structure
@@ -86,7 +86,7 @@ Here a pairwise correlation is shown in red and green. A Potts model should then
 Notably, the **J** parameter captures pairwise correlations. However, just looking at the correlations between amino acid pairs is not enough. If A and B coevolve, but B and C also coevolve, this means A and C coevolve as well but they are not necessarily structurally adjacent. This phenomenon known as chaining needs to be disentangled from actual structurally adjacent pairs. To do this, we reduce the (L by 21) by (L by 21) matrix **J** into an L by L matrix by taking the sum of each 21 by 21 grid (green grid in the figure showing parameter **J**). Only after applying average product correction (APC) sifts out “direct couplings” from correlations from amino acids which show correlation but are not actually in contact. By only keeping the direct couplings, the patterns of protein contacts emerge.
 
 <p align="center">
-  <img src="/assets/images/apc.png" alt="apc" style="width:85%">
+  <img src="/assets/images/apc.png" alt="apc" style="width:100%">
 </p>
 
 We can visualize these predicted contacts on the structure of a protein in this homologous family. First let's see the actual contacts:
