@@ -122,11 +122,19 @@ Then let's see the predicted contacts in black sticks:
     // create a `stage` object
     var stage = new NGL.Stage("viewport2", { backgroundColor: "#FFFFFF" });
     var atomPair = [
-	    [44, 252],
-	    [49, 103],
-	    [164, 184],
-	    [156, 180],
-	    [177, 262]
+        [36, 78],
+        [38, 76],
+        [67, 79],
+        [73, 246],
+        [93, 100],
+        [133, 157],
+        [135, 158],
+        [136, 146],
+        [146, 159],
+        [187, 215],
+        [187, 217],
+        [188, 220],
+        [201, 213]
 	  ]
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
