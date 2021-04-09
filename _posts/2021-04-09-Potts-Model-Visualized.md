@@ -114,7 +114,7 @@ We can visualize these predicted contacts on the structure of a protein in this 
 <div id="viewport1" style="height: 500px;"></div>
 </div>
 
-Then let's see the predicted contacts in red sticks:
+Then let's see the predicted contacts in black sticks:
 
 <div id="protein" style="height: 500px;">
 <script>
@@ -122,19 +122,11 @@ Then let's see the predicted contacts in red sticks:
     // create a `stage` object
     var stage = new NGL.Stage("viewport2", { backgroundColor: "#FFFFFF" });
     var atomPair = [
-	    [7, 49],
-		[9, 47],
-		[38, 50],
-		[44, 217],
-		[64, 71],
-		[104, 128],
-		[106, 129],
-		[107, 117],
-		[117, 130],
-		[158, 186],
-		[158, 188],
-		[159, 191],
-		[172, 184]
+	    [44, 252],
+	    [49, 103],
+	    [164, 184],
+	    [156, 180],
+	    [177, 262]
 	  ]
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
@@ -149,7 +141,7 @@ Then let's see the predicted contacts in red sticks:
     o.addRepresentation("ball+stick", { sele: "ligand" })
     o.addRepresentation("distance", {
 	    atomPair: atomPair,
-	    color: "red",
+	    color: "black",
 	    labelUnit: "na"
 	  })
     o.autoView();
