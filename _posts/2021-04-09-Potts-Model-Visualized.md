@@ -46,13 +46,10 @@ Proteins are linear chains of molecules known as amino acids. There are 20 commo
 </p>
 
 
-Such complicated twists and turns can be represented as a distance matrix, where entry row i and column j is the distance between residue i and residue j. Distance matrices can be binarized into a contact map where every entry in the matrix is either 0 or 1. If the entry in row i and column j of the contact map is 1, it represents that amino acid i is “in contact” with amino acid j. “In contact” usually means that the two amino acids are within some distance apart, usually 6 Angstroms. To get a sense of how small this is, it is about 1 millionth the width of a human hair.
+Such complicated twists and turns can be represented as a distance matrix, where entry row i and column j is the distance between residue i and residue j. Distance matrices can be binarized into a contact map where every entry in the matrix is either 0 or 1. If the entry in row i and column j of the contact map is 1, it represents that amino acid i is “in contact” with amino acid j. “In contact” usually means that the two amino acids are within some distance apart, usually 6 Angstroms. To get a sense of how small this is, it is about 1 millionth the width of a human hair. The distance matrix and contact map of protein 6EQD is shown below.
 
 <p align="center">
-<figure>
   <img src="/assets/images/dist_cont.PNG" alt="dist and contact" style="width:100%">
-  <figcaption>Distance matrix and contact map of protein 6EQD</figcaption>
-</figure>
 </p>
 
 ## Evolutionary Constraints
