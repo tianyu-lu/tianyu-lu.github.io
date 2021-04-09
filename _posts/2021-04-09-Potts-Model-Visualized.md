@@ -14,33 +14,29 @@ Inspired by [The Illustrated Transformer](http://jalammar.github.io/illustrated-
 
 Proteins are linear chains of molecules known as amino acids. There are 20 commonly occurring amino acids represented by twenty letters of the English alphabet A-Z except for `BJOUXZ`. To account for insertions and deletions, we include an additional letter '-' representing an amino acid of length zero. These amino acids are chained together in a string, so a single protein chain can be described by a string of letters such as `MNFPRATANCSLQPLD`. Many proteins fold into 3-dimensional structures as shown below (the structures shown are interactive).
 
-<p align="center">
-<div id="protein">
-	<script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
-	<script>
-	    document.addEventListener("DOMContentLoaded", function () {
-	    // create a `stage` object
-	    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
-	    // Handle window resizing
-	    window.addEventListener( "resize", function( event ){
-	        stage.handleResize();
-	    }, false );
-	    // load a PDB structure and consume the returned `Promise`
-	    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
-	    // add a "cartoon" representation to the structure component
-	    // component.addRepresentation("cartoon");
-	    // provide a "good" view of the structure
-	    o.addRepresentation("cartoon", { color: "residueindex" })
-	    o.addRepresentation("ball+stick", { sele: "ligand" })
-	    // o.addRepresentation("contact")
-	    o.autoView();
-	    stage.animationControls.spinComponent(o, [0,1,0])
-	    });
-	    });
-	</script>
-	<div id="viewport"></div>
-</div>
-</p>
+<script src="https://unpkg.com/ngl@0.10.4/dist/ngl.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // create a `stage` object
+    var stage = new NGL.Stage("viewport", { backgroundColor: "#FFFFFF" });
+    // Handle window resizing
+    window.addEventListener( "resize", function( event ){
+        stage.handleResize();
+    }, false );
+    // load a PDB structure and consume the returned `Promise`
+    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
+    // add a "cartoon" representation to the structure component
+    // component.addRepresentation("cartoon");
+    // provide a "good" view of the structure
+    o.addRepresentation("cartoon", { color: "residueindex" })
+    o.addRepresentation("ball+stick", { sele: "ligand" })
+    // o.addRepresentation("contact")
+    o.autoView();
+    stage.animationControls.spinComponent(o, [0,1,0])
+    });
+    });
+</script>
+<div id="viewport"></div>
 
 
 Such complicated twists and turns can be represented as a distance matrix, where entry row i and column j is the distance between residue i and residue j. Distance matrices can be binarized into a contact map where every entry in the matrix is either 0 or 1. If the entry in row i and column j of the contact map is 1, it represents that amino acid i is “in contact” with amino acid j. “In contact” usually means that the two amino acids are within some distance apart, usually 6 Angstroms. To get a sense of how small this is, it is about 1 millionth the width of a human hair. The distance matrix and contact map of protein 6EQD is shown below.
@@ -91,16 +87,16 @@ Notably, the **J** parameter captures pairwise correlations. However, just looki
 
 We can visualize these predicted contacts on the structure of a protein in this homologous family. First let's see the actual contacts:
 
-<!-- <script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
-    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    var stage = new NGL.Stage("viewport1", { backgroundColor: "#FFFFFF" });
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
         stage.handleResize();
     }, false );
     // load a PDB structure and consume the returned `Promise`
-    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
     // add a "cartoon" representation to the structure component
     // component.addRepresentation("cartoon");
     // provide a "good" view of the structure
@@ -112,14 +108,14 @@ We can visualize these predicted contacts on the structure of a protein in this 
     });
     });
 </script>
-<div id="viewport"></div>
+<div id="viewport1"></div>
 
 Then let's see the predicted contacts in red sticks:
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
-    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    var stage = new NGL.Stage("viewport2", { backgroundColor: "#FFFFFF" });
     var atomPair = [
 	    [7, 49],
 		[9, 47],
@@ -140,7 +136,7 @@ Then let's see the predicted contacts in red sticks:
         stage.handleResize();
     }, false );
     // load a PDB structure and consume the returned `Promise`
-    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
     // add a "cartoon" representation to the structure component
     // component.addRepresentation("cartoon");
     // provide a "good" view of the structure
@@ -149,14 +145,14 @@ Then let's see the predicted contacts in red sticks:
     o.addRepresentation("distance", {
 	    atomPair: atomPair,
 	    color: "red",
-	    labelUnit: "na"
+	    labelUnit: "nm"
 	  })
     o.autoView();
     // stage.animationControls.spinComponent(o, [0,1,0])
     });
     });
 </script>
-<div id="viewport"></div>	 -->
+<div id="viewport2"></div>	
 
 An excellent PyTorch implementation of training such a model can be found [here](https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb).
 

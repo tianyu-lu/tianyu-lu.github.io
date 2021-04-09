@@ -88,13 +88,13 @@
 	<script>
 	    document.addEventListener("DOMContentLoaded", function () {
 	    // create a `stage` object
-	    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+	    var stage = new NGL.Stage("viewport", { backgroundColor: "#FFFFFF" });
 	    // Handle window resizing
 	    window.addEventListener( "resize", function( event ){
 	        stage.handleResize();
 	    }, false );
 	    // load a PDB structure and consume the returned `Promise`
-	    stage.loadFile("assets/structures/protein.pdb").then(function (o) {
+	    stage.loadFile("/assets/structures/protein.pdb").then(function (o) {
 	    // add a "cartoon" representation to the structure component
 	    // component.addRepresentation("cartoon");
 	    // provide a "good" view of the structure
@@ -161,7 +161,7 @@
 <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
-    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    var stage = new NGL.Stage("viewport", { backgroundColor: "#FFFFFF" });
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
         stage.handleResize();
@@ -186,7 +186,7 @@ Then let's see the predicted contacts in red sticks:
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
-    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
+    var stage = new NGL.Stage("viewport", { backgroundColor: "#FFFFFF" });
     var atomPair = [
 	    [7, 49],
 		[9, 47],
