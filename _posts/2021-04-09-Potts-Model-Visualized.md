@@ -21,9 +21,6 @@ Proteins are linear chains of molecules known as amino acids. There are 20 commo
 	    document.addEventListener("DOMContentLoaded", function () {
 	    // create a `stage` object
 	    var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
-	    var atomPair = [
-		    [ 30, 50 ]
-		  ]
 	    // Handle window resizing
 	    window.addEventListener( "resize", function( event ){
 	        stage.handleResize();
@@ -65,28 +62,23 @@ Somehow the information of coevolving residues need to be captured in the Potts 
 Now let's take a look at the parameters of the model. The **J** parameter is a (L by 21) by (L by 21) matrix that looks like this:
 
 <p align="center">
-<figure>
   <img src="/assets/images/potts_j.PNG" alt="pottsj" style="width:100%">
-  <figcaption>The 21x21 square shown models the pairwise frequencies of all possible 21x21 pairs of amino acids for amino acid positions 6 and 3. L = 10 in this example.</figcaption>
-</figure>
 </p>
+
+The 21x21 square shown models the pairwise frequencies of all possible 21x21 pairs of amino acids for amino acid positions 6 and 3. L = 10 in this example.
 
 It also includes a parameter **h** which models the sitewise frequencies of sequences, looking like this:
 
 <p align="center">
-<figure>
   <img src="/assets/images/potts_h.PNG" alt="pottsh" style="width:80%">
-  <figcaption>L = 10 in this example. For example, row 2 models the frequencies of the 21 amino acids (including gap) at position 2.</figcaption>
-</figure>
 </p>
 
-The input to a Potts model is a multiple sequence alignment, an example looks like this:
+L = 10 in this example. For example, row 2 models the frequencies of the 21 amino acids (including gap) at position 2.
+
+The input to a Potts model is a multiple sequence alignment. Conversion of a multiple sequence alignment to a numerical representation on the computer simply maps each amino acid to an integer between 0 and 20 inclusive. An example looks like this:
 
 <p align="center">
-<figure>
   <img src="/assets/images/potts_input.PNG" alt="pottsin" style="width:80%">
-  <figcaption>Conversion of a multiple sequence alignment to a numerical representation on the computer simply maps each amino acid to an integer between 0 and 20 inclusive.</figcaption>
-</figure>
 </p>
 
 Here a pairwise correlation is shown in red and green. A Potts model should then predict these two positions as being in contact.
@@ -94,15 +86,12 @@ Here a pairwise correlation is shown in red and green. A Potts model should then
 Notably, the **J** parameter captures pairwise correlations. However, just looking at the correlations between amino acid pairs is not enough. If A and B coevolve, but B and C also coevolve, this means A and C coevolve as well but they are not necessarily structurally adjacent. This phenomenon known as chaining needs to be disentangled from actual structurally adjacent pairs. To do this, we reduce the (L by 21) by (L by 21) matrix **J** into an L by L matrix by taking the sum of each 21 by 21 grid (green grid in the figure showing parameter **J**). Only after applying average product correction (APC) sifts out “direct couplings” from correlations from amino acids which show correlation but are not actually in contact. By only keeping the direct couplings, the patterns of protein contacts emerge.
 
 <p align="center">
-<figure>
   <img src="/assets/images/apc.png" alt="apc" style="width:85%">
-  <figcaption></figcaption>
-</figure>
 </p>
 
 We can visualize these predicted contacts on the structure of a protein in this homologous family. First let's see the actual contacts:
 
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
     // create a `stage` object
     var stage = new NGL.Stage("viewport", { backgroundColor: "#F9F9F9" });
@@ -167,7 +156,7 @@ Then let's see the predicted contacts in red sticks:
     });
     });
 </script>
-<div id="viewport"></div>	
+<div id="viewport"></div>	 -->
 
 An excellent PyTorch implementation of training such a model can be found [here](https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb).
 
