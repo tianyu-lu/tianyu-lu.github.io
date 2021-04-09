@@ -122,19 +122,11 @@ Then let's see the predicted contacts in black sticks:
     // create a `stage` object
     var stage = new NGL.Stage("viewport2", { backgroundColor: "#FFFFFF" });
     var atomPair = [
-        ["36.CA", "78.CA"],
-        ["38.CA", "76.CA"],
-        ["67.CA", "79.CA"],
-        ["73.CA", "246.CA"],
-        ["93.CA", "100.CA"],
-        ["133.CA", "157.CA"],
-        ["135.CA", "158.CA"],
-        ["136.CA", "146.CA"],
-        ["146.CA", "159.CA"],
-        ["187.CA", "215.CA"],
-        ["187.CA", "217.CA"],
-        ["188.CA", "220.CA"],
-        ["201.CA", "213.CA"]
+	    ["73.CA", "281.CA"],
+        ["78.CA", "132.CA"],
+        ["193.CA", "213.CA"],
+        ["185.CA", "209.CA"],
+        ["206.CA", "291.CA"]
 	  ]
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
@@ -150,7 +142,7 @@ Then let's see the predicted contacts in black sticks:
     o.addRepresentation("distance", {
 	    atomPair: atomPair,
 	    color: "black",
-	    labelUnit: "na"
+	    labelUnit: "nm"
 	  })
     o.autoView();
     // stage.animationControls.spinComponent(o, [0,1,0])
