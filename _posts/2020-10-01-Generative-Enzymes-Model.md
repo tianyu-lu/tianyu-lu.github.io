@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Generative-Enzymes-Model"
+title:  "Generative Enzymes Model"
 date:   2020-10-01 10:00:00
 categories: Research Protein ML
 excerpt_separator: <!--more-->

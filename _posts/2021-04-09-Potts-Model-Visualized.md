@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Potts-Model-Visualized"
+title:  "Potts Model Visualized"
 date:   2021-04-09 10:00:00
 categories: Communication Protein ML
 excerpt_separator: <!--more-->
@@ -37,7 +37,7 @@ Proteins are linear chains of molecules known as amino acids. There are 20 commo
 	    });
 	    });
 	</script>
-	<div id="viewport"></div>
+	<div id="viewport" style="height: 500px;"></div>
 </div>
 
 
@@ -111,7 +111,7 @@ We can visualize these predicted contacts on the structure of a protein in this 
     });
     });
 </script>
-<div id="viewport1"></div>
+<div id="viewport1" style="height: 500px;"></div>
 </div>
 
 Then let's see the predicted contacts in red sticks:
@@ -157,7 +157,7 @@ Then let's see the predicted contacts in red sticks:
     });
     });
 </script>
-<div id="viewport2"></div>	
+<div id="viewport2" style="height: 500px;"></div>	
 </div>
 
 An excellent PyTorch implementation of training such a model can be found [here](https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb).
