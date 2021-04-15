@@ -122,12 +122,35 @@ Then let's see the predicted contacts in black sticks:
     // create a `stage` object
     var stage = new NGL.Stage("viewport2", { backgroundColor: "#FFFFFF" });
     var atomPair = [
-	    ["98.CA", "110.CA"],
-        ["124.CA", "131.CA"],
+	    ["156.CA", "166.CA"],
+        ["98.CA", "110.CA"],
         ["153.CA", "177.CA"],
-        ["156.CA", "166.CA"],
         ["166.CA", "179.CA"],
-        ["219.CA", "230.CA"]
+        ["155.CA", "178.CA"],
+        ["124.CA", "131.CA"],
+        ["219.CA", "230.CA"],
+        ["222.CA", "228.CA"],
+        ["170.CA", "179.CA"],
+        ["123.CA", "130.CA"],
+        ["121.CA", "130.CA"],
+        ["121.CA", "128.CA"],
+        ["176.CA", "183.CA"],
+        ["119.CA", "126.CA"],
+        ["122.CA", "131.CA"],
+        ["199.CA", "229.CA"],
+        ["120.CA", "129.CA"],
+        ["70.CA", "107.CA"],
+        ["83.CA", "94.CA"],
+        ["127.CA", "135.CA"],
+        ["123.CA", "131.CA"],
+        ["179.CA", "196.CA"],
+        ["78.CA", "107.CA"],
+        ["125.CA", "134.CA"],
+        ["156.CA", "176.CA"],
+        ["144.CA", "175.CA"],
+        ["167.CA", "181.CA"],
+        ["125.CA", "132.CA"],
+        ["167.CA", "198.CA"]
 	  ]
     // Handle window resizing
     window.addEventListener( "resize", function( event ){
