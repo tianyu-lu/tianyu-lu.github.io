@@ -225,6 +225,8 @@ Then let's see the predicted contacts in black sticks:
 
 An excellent PyTorch implementation of training such a model can be found [here](https://github.com/whbpt/GREMLIN_PYTORCH/blob/master/GREMLIN_pytorch_2.ipynb).
 
+Various training strategies can be used to train a Potts model. As the final project, [Syed Ather](https://hussainather.com/) and I wrote a [manuscript](/assets/papers/potts.html) comparing how different training strategies affect modelling first/second order correlations, contact prediction, out-of-distribution detection, and correlation with the Rosetta Energy Function.
+
 ## References
 
 Balakrishnan, Sivaraman, et al. "Learning generative models for protein fold families." Proteins: Structure, Function, and Bioinformatics 79.4 (2011): 1061-1078.
