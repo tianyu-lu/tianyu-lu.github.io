@@ -6,9 +6,19 @@ categories: Research Protein ML
 excerpt_separator: <!--more-->
 ---
 
-Walkthrough of how to use MaSIF to search for DNA mimicking proteins in the PDB.
+Lab meeting slides at Philip Kim's group on classical and machine learning guided protein design, with a walkthrough of how to use MaSIF to search for DNA mimicking proteins in the PDB.
 
 <!--more-->
+
+### Protein Backbone Search and Design Slides
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTG43cbKx7oYwsmUOcvN5nZaola4klYqNoJvYYlOytsJZfTJ59EKxawfNYnp1P0kA/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+### Classical Protein Design Pipeline
+
+Steps involved in generating protein sequences to optimize binding affinity to another protein. Covers docking with HADDOCK, molecular dynamics simulations with GROMACS, simulated annealing in RosettaDesign, and free energy calculations using non-equilibrium MD for filtering.
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQD0CxtS1LVFuemedds0z-U3I5RKtH6UH2ZTu-t0yDPghx1VSattquEoPYJxSNdVQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### MaSIF Search
 
@@ -44,14 +54,3 @@ export REQUESTS_CA_BUNDLE="/home/<USERNAME>/.config/pip/ca-bundle.crt"
 pip3.6 install --upgrade --user numpy==1.16.1
 ```
 should do the trick.
-
-### Protein Backbone Search and Design Slides
-
-<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={4e2f50a3-677a-48da-91a2-be9bd8ff47bf}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-
-### Classical Protein Design Pipeline
-
-Steps involved in generating protein sequences to optimize binding affinity to another protein. Covers docking with HADDOCK, molecular dynamics simulations with GROMACS, simulated annealing in RosettaDesign, and free energy calculations using non-equilibrium MD for filtering.
-
-<iframe src="https://utoronto-my.sharepoint.com/personal/tianyu_lu_mail_utoronto_ca/_layouts/15/Doc.aspx?sourcedoc={8fa06acd-7e34-4059-88ff-68011c50000e}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-
