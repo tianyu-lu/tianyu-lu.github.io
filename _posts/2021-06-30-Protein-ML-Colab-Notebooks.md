@@ -70,3 +70,5 @@ The table of contents Colab notebook is [here](https://colab.research.google.com
 ### Slides
 
 The accompanying slides to notebooks 1, 2 and 3. Slides 1-28 can be delivered in about 2 hours.
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTUeqZVRnV9ve020al6VjNDBohMKk_gsFKEagjnYmsUVYFOSnELRpcryHdu0ngX_w/embed?start=false&loop=false&delayms=3000" frameborder="0" width="640" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>

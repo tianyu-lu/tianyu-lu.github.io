@@ -12,13 +12,13 @@ Lab meeting slides at Philip Kim's group on classical and machine learning guide
 
 ### Protein Backbone Search and Design Slides
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTG43cbKx7oYwsmUOcvN5nZaola4klYqNoJvYYlOytsJZfTJ59EKxawfNYnp1P0kA/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTG43cbKx7oYwsmUOcvN5nZaola4klYqNoJvYYlOytsJZfTJ59EKxawfNYnp1P0kA/embed?start=false&loop=false&delayms=3000" frameborder="0" width="640" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### Classical Protein Design Pipeline
 
 Steps involved in generating protein sequences to optimize binding affinity to another protein. Covers docking with HADDOCK, molecular dynamics simulations with GROMACS, simulated annealing in RosettaDesign, and free energy calculations using non-equilibrium MD for filtering.
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQD0CxtS1LVFuemedds0z-U3I5RKtH6UH2ZTu-t0yDPghx1VSattquEoPYJxSNdVQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQD0CxtS1LVFuemedds0z-U3I5RKtH6UH2ZTu-t0yDPghx1VSattquEoPYJxSNdVQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="640" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### MaSIF Search
 
