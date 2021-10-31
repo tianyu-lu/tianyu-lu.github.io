@@ -3,6 +3,7 @@ layout: default
 title: Home
 cover: false
 about: 'about.html'
+resume: 'resume/resume.html'
 protein: 'potts.html'
 ---
 
@@ -25,6 +26,9 @@ protein: 'potts.html'
             </h2>
             <h2 class="page-description">
                 {% if page.about %} <a href='{{ site.baseurl }}{{ page.about }}'> About me </a> {% endif %}
+            </h2>
+            <h2 class="page-description">
+                {% if page.about %} <a href='{{ site.baseurl }}{{ page.resume }}'> Resume </a> {% endif %}
             </h2>
         </div>
     </div>
